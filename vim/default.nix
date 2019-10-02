@@ -268,6 +268,9 @@ let
     colorscheme fahrenheit
     autocmd BufEnter * colorscheme fahrenheit
     autocmd BufEnter *.nix colorscheme orbital
+
+    autocmd BufEnter * call SyntaxRange#Include("-E ' ", "#nix'", 'nix')
+
     autocmd BufEnter *.hs call SyntaxRange#Include('\[text|', '|\]', 'markdown')
     autocmd BufEnter *.hs call SyntaxRange#Include('\[r|', '|\]', 'haskell')
     autocmd BufEnter *.hs call SyntaxRange#Include('\[l|', '|\]', 'haskell')

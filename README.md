@@ -1,1 +1,1 @@
-ad-hoc dev-env deployment on remote systems, berk
+dev. env. packageset for remote systems. ugly
