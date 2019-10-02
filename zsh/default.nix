@@ -203,4 +203,13 @@ let
     local p_exitcode='%F{green}%?%(!.%F{cyan}>.%b%F{green}>)%b%f '
     PROMPT='$(prompt_nix_shell)$p_machine$p_path''${vcs_info_msg_0_}$p_exitcode'
   '';
-in pkgs.writeScriptBin "z" "ZDOTDIR=${zshrc} ${pkgs.zsh}/bin/zsh  $@"
+
+  zdotdir = pkgs.stdenv.mkDerivation {
+    name = "zdotdir";
+    installPhase = ''
+      mkdir $out
+      cp ${zshrc} $out/
+    '';
+    phases = [ "installPhase" ];
+  };
+in pkgs.writeScriptBin "z" "ZDOTDIR=${zdotdir} ${pkgs.zsh}/bin/zsh $@"
