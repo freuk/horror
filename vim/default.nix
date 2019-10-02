@@ -146,17 +146,13 @@ let
     nnoremap <space>s :Rg<Space>
 
     set rtp+=${
-      pkgs.fetchzip {
-        url = "https://github.com/AndrewRadev/linediff.vim/archive/master.zip";
-        sha256 = "1xidibxfksli1x4sb3m0p633pjm677kvga78ilvpyjd86v1hpk5w";
-      }
+      builtins.fetchTarball
+      "https://github.com/AndrewRadev/linediff.vim/archive/master.tar.gz"
     }
 
     set rtp+=${
-      pkgs.fetchzip {
-        url = "https://github.com/bkad/CamelCaseMotion/archive/master.zip";
-        sha256 = "1g9hl6rxabbijs8hp53ra08iqgbc34bv4sbifkcjkjdr3r6fikas";
-      }
+      builtins.fetchTarball
+      "https://github.com/bkad/CamelCaseMotion/archive/master.tar.gz"
     }
 
     call camelcasemotion#CreateMotionMappings('<leader>')
@@ -230,7 +226,6 @@ let
 
     set rtp+=${./sideways.vim}
 
-    set rtp+=${./vim-taskwarrior}
     set rtp+=${./vim-devicons}
 
     set rtp+=${./vim-submode}
