@@ -1,0 +1,7 @@
+" clear all settings
+set nocompatible
+set all&
+mapclear
+abclear
+comclear
+autocmd!

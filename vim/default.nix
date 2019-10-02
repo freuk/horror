@@ -1,0 +1,505 @@
+{ pkgs }:
+
+with pkgs.lib;
+let
+  custRC = ''
+    filetype plugin indent on
+    syntax on
+    set nocompatible
+    set smartindent
+    set modeline
+    set mouse=a
+    set hlsearch
+    set bs=indent,eol,start
+    set encoding=UTF-8
+    set fileencoding=UTF-8
+    set fileencodings=utf8,prc
+    set t_Co=256
+    set background=dark
+    set nostartofline
+    set nu
+    set ls=2
+    set title
+    set clipboard=unnamedplus
+    set grepprg=grep\ -nH\ $*
+    set timeoutlen=1000
+    set ttimeoutlen=0
+    set tabstop=2
+    set softtabstop=2
+    set shiftwidth=2
+    set expandtab
+    set nocursorline
+    set nocursorcolumn
+    set scrolljump=5
+    set lazyredraw
+    set synmaxcol=180
+    set noshowmode
+    set noruler
+    set noshowcmd
+    set laststatus=2
+    set showtabline=1
+    set cole=0
+
+    let mapleader = "-"
+
+    nnoremap <Leader><Leader> :noh<cr>
+
+    "quickfix navigation
+    map <C-j> :lnext<CR>
+    map <C-k> :lprevious<CR>
+
+    nnoremap Q @q
+    vnoremap Q :norm @q<cr>
+
+    vnoremap L <Esc>`<<C-v>`>odp`<<C-v>`>lol
+    vnoremap H <Esc>`<<C-v>`>odhP`<<C-v>`>hoh
+
+    let s:hidden_all = 1
+
+    map  <Space>k :wincmd k<CR>
+    map  <Space>j :wincmd j<CR>
+    map  <Space>h :wincmd h<CR>
+    map  <Space>l :wincmd l<CR>
+
+    let maplocalleader=","
+    nnoremap <Leader>p gwip
+    nnoremap <Leader>r :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i"
+    cmap w!! w !sudo tee> /dev/null %
+    nnoremap m :nohlsearch<Bar>:echo<CR>
+    nmap T :NERDTreeToggle<CR>
+
+    let g:move_key_modifier = 'C'
+
+    set cursorline
+    hi CursorLine term=bold cterm=bold guibg=Grey40
+
+    " Highlight all instances of word under cursor, when idle.
+    " Useful when studying strange source code.
+    " Type z/ to toggle highlighting on/off.
+    nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+    function! AutoHighlightToggle()
+      let @/ = '''
+      if exists('#auto_highlight')
+        au! auto_highlight
+        augroup! auto_highlight
+        setl updatetime=4000
+        echo 'Highlight current word: off'
+        return 0
+      else
+        augroup auto_highlight
+          au!
+          au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+        augroup end
+        setl updatetime=500
+        echo 'Highlight current word: ON'
+        return 1
+      endif
+    endfunction
+
+    "vim-multiple-cursors
+    let g:multi_cursor_next_key='<C-n>'
+    let g:multi_cursor_prev_key='<C-p>'
+    let g:multi_cursor_skip_key='<C-x>'
+    let g:multi_cursor_quit_key='<Esc>'
+    let g:multi_cursor_exit_from_visual_mode=0
+    let g:multi_cursor_exit_from_insert_mode=0
+
+    "ctrlp
+    let g:ctrlp_working_path_mode = 'ra'
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlPMixed'
+    let g:ctrlp_custom_ignore = {
+          \ 'dir':  '\v[\/]\.(git|hg|svn)$$',
+          \ 'file': '\v\.(exe|so|dll)$$',
+          \ 'link': 'some_bad_symbolic_links',
+          \ }
+
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_tex_lacheck_quiet_messages = { 'regex': '\Vpossible unwanted space at' }
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_haskell_checkers = []
+
+    " fugitive git bindings
+    nnoremap <space>ga :Git add %:p<CR><CR>
+    nnoremap <space>gs :Gstatus<CR>
+    nnoremap <space>gc :Gcommit -v -q<CR>
+    nnoremap <space>gt :Gcommit -v -q %:p<CR>
+    nnoremap <space>gd :Gdiff<CR>
+    nnoremap <space>ge :Gedit<CR>
+    nnoremap <space>gr :Gread<CR>
+    nnoremap <space>gw :Gwrite<CR><CR>
+    nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+    nnoremap <space>gp :Ggrep<Space>
+    nnoremap <space>gm :Gmove<Space>
+    nnoremap <space>gb :Git branch<Space>
+    nnoremap <space>go :Git checkout<Space>
+
+    nnoremap <space>w :w<cr>
+
+    nnoremap <space>g :Rs<cr>
+    nnoremap <space>s :Rg<Space>
+
+    set rtp+=${
+      pkgs.fetchzip {
+        url = "https://github.com/AndrewRadev/linediff.vim/archive/master.zip";
+        sha256 = "1xidibxfksli1x4sb3m0p633pjm677kvga78ilvpyjd86v1hpk5w";
+      }
+    }
+
+    set rtp+=${
+      pkgs.fetchzip {
+        url = "https://github.com/bkad/CamelCaseMotion/archive/master.zip";
+        sha256 = "1g9hl6rxabbijs8hp53ra08iqgbc34bv4sbifkcjkjdr3r6fikas";
+      }
+    }
+
+    call camelcasemotion#CreateMotionMappings('<leader>')
+    map <silent> w <Plug>CamelCaseMotion_w
+    map <silent> b <Plug>CamelCaseMotion_b
+    map <silent> e <Plug>CamelCaseMotion_e
+    map <silent> ge <Plug>CamelCaseMotion_ge
+    sunmap w
+    sunmap b
+    sunmap e
+    sunmap ge
+
+    set rtp+=${./rgrin}
+    set rtp+=${./vim-orbital}
+    set rtp+=${./tabular}
+    set rtp+=${./vim-jdaddy}
+    set rtp+=${./colo}
+    set rtp+=${./elm-vim}
+    set rtp+=${./direnv.vim}
+    set rtp+=${./tla.vim}
+    nmap <Space>m <Plug>(quickhl-manual-this)
+    xmap <Space>m <Plug>(quickhl-manual-this)
+    nmap <Space>w <Plug>(quickhl-manual-this-whole-word)
+    xmap <Space>w <Plug>(quickhl-manual-this-whole-word)
+    nmap <Space>c <Plug>(quickhl-manual-clear)
+    vmap <Space>c <Plug>(quickhl-manual-clear)
+    nmap <Space>M <Plug>(quickhl-manual-reset)
+    xmap <Space>M <Plug>(quickhl-manual-reset)
+    set rtp+=${./Colorizer}
+    set rtp+=${./neoformat}
+    set rtp+=${./vim-toggle}
+    set rtp+=${./vim-slime}
+    set rtp+=${./hlint-refactor-vim}
+    set rtp+=${./rainbow}
+    set rtp+=${./ghcid}
+    set rtp+=${./vim-hoogle}
+    set rtp+=${./vim-farout}
+    set rtp+=${./vim-fahrenheit}
+    set rtp+=${./vim-spotlightify}
+    set rtp+=${./HowMuch}
+    set rtp+=${./vim-exchange}
+    set rtp+=${./async.vim}
+    set rtp+=${./vim-nerdtree-syntax-highlight}
+    set rtp+=${./unite-haskellimport}
+    set rtp+=${./vim-better-whitespace}
+    set rtp+=${./unite-haddock}
+    let g:unite_source_haddock_browser = 'firefox'
+    set rtp+=${./vim-localvimrc}
+    set rtp+=${./vim-unimpaired}
+    set rtp+=${./vim-SyntaxRange}
+    set rtp+=${./vim-ingo-library}
+
+    set rtp+=${./dhall-vim}
+    autocmd BufEnter *.dh :setlocal filetype=dhall
+    autocmd BufEnter *.dhall :setlocal filetype=dhall
+    autocmd BufEnter *.tex :set spell
+
+    set rtp+=${./val_snippets}
+    set rtp+=${./vim-sneak}
+    set rtp+=${./simpleblack}
+    set rtp+=${./ncm-R}
+    set rtp+=${./Nvim-R}
+    let R_assign = 0
+    set rtp+=${./nvim-yarp}
+    set rtp+=${./ncm2}
+    set rtp+=${./ncm2-ultisnips}
+    set rtp+=${./ncm2-path}
+    "set rtp+=${./coc.nvim}
+
+    set rtp+=${./vim-ripgrep}
+
+    set rtp+=${./sideways.vim}
+
+    set rtp+=${./vim-taskwarrior}
+    set rtp+=${./vim-devicons}
+
+    set rtp+=${./vim-submode}
+    call submode#enter_with('fieldtrip', 'n', ''', '<leader>a', '<nop>')
+    call submode#map('fieldtrip', 'n', ''', 'H', ':SidewaysLeft<cr>')
+    call submode#map('fieldtrip', 'n', ''', 'L', ':SidewaysRight<cr>')
+    call submode#map('fieldtrip', 'n', ''', 'l', ':SidewaysJumpLeft<cr>')
+    call submode#map('fieldtrip', 'n', ''', 'h', ':SidewaysJumpRight<cr>')
+    call submode#map('fieldtrip', 'n', 'rs', 'd', 'd<Plug>SidewaysArgumentTextobjA')
+    call submode#map('fieldtrip', 'n', 'rs', 'x', 'd<Plug>SidewaysArgumentTextobjI')
+    call submode#map('fieldtrip', 'n', 'rs', 'c', 'c<Plug>SidewaysArgumentTextobjI')
+    call submode#map('fieldtrip', 'n', 'r', 'w', 'w')
+    call submode#map('fieldtrip', 'n', 'r', 'W', 'W')
+    call submode#map('fieldtrip', 'n', 'r', 'b', 'b')
+    call submode#map('fieldtrip', 'n', 'r', 'B', 'B')
+    call submode#map('fieldtrip', 'n', 'r', 'u', 'u')
+
+    nnoremap <leader>hI :execute "Unite -start-insert haskellimport"<CR>
+    nnoremap <leader>hs :execute "Unite hoogle"<CR>
+    nnoremap H :call HideCommentToggle()<cr>
+
+    let g:comments_hidden = 0
+    function! HideCommentToggle()
+        if g:comments_hidden
+            :hi! link Comment Ignore
+            let g:comments_hidden = 0
+        else
+            :hi! link Comment Comment
+            let g:comments_hidden = 1
+        endif
+    endfunction
+
+    nnoremap <Leader>w :StripWhitespace<cr>
+
+    colorscheme fahrenheit
+    autocmd BufEnter * colorscheme fahrenheit
+    autocmd BufEnter *.nix colorscheme orbital
+    autocmd BufEnter *.hs call SyntaxRange#Include('\[text|', '|\]', 'markdown')
+    autocmd BufEnter *.hs call SyntaxRange#Include('\[r|', '|\]', 'haskell')
+    autocmd BufEnter *.hs call SyntaxRange#Include('\[l|', '|\]', 'haskell')
+    autocmd BufEnter *.hs call SyntaxRange#Include('\[R.r|', '|\]', 'r')
+    autocmd BufEnter *.nix call SyntaxRange#Include('custRC =', ' ''';', 'vim')
+
+    vmap <C-c><C-c> <Plug>SendSelectionToTmux
+    nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+    nmap <C-c>r <Plug>SetTmuxVars
+
+    set cole=2
+    let g:tex_conceal="adgm"
+
+    imap <C-t> <Plug>ToggleI
+    nmap <C-t> <Plug>ToggleN
+    vmap <C-t> <Plug>ToggleV
+
+    let g:slime_target="tmux"
+
+    au BufNewFile,BufRead *.hs map <buffer> <C-H> :Hoogle
+
+    let g:localvimrc_enable=1
+
+    "neoformat
+    let g:neoformat_enabled_haskell = ['ormolu']
+    let g:neoformat_enabled_lhaskell = ['ormolu']
+    let g:neoformat_enabled_nix = ['nixfmt']
+    let g:neoformat_enabled_python = ['black']
+    "let g:neoformat_enabled_haskell = ['brittany']
+    let g:neoformat_enabled_dhall = ['dhall']
+    let g:neoformat_enabled_c = ['clangformat']
+    let g:neoformat_enabled_latex = ['latexindent']
+    noremap <Leader>f :Neoformat<CR><CR>
+
+    let g:haskell_enable_quantification = 1
+    let g:haskell_enable_recursivedo = 1
+    let g:haskell_enable_arrowsyntax = 1
+    let g:haskell_enable_pattern_synonyms = 1
+    let g:haskell_enable_typeroles = 1
+    let g:haskell_enable_static_pointers = 1
+    let g:haskell_backpack = 1
+    let g:haskell_disable_TH = 0
+
+    let g:hdevtools_options = '-g-Wall -S -g-fdefer-type-errors'
+    let g:syntastic_haskell_hdevtools_args = '-g-Wall -S -g-fdefer-type-errors'
+
+    nnoremap <leader>hI :execute "Unite -start-insert haskellimport"<CR>
+
+    au FileType haskell nnoremap <buffer> <Leader>tt :HdevtoolsType<CR>
+    au FileType haskell nnoremap <buffer> <silent> <Leader>ti :HdevtoolsInfo<CR>
+    au FileType haskell nnoremap <buffer> <silent> <Leader>tc :HdevtoolsClear<CR>
+
+    let g:rainbow_active = 0
+
+    let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ], 'haskell': ['hlint']}
+    let g:ale_completion_enabled = 0
+    let g:loaded_syntastic_nroff_proselint_checker = 1
+
+    autocmd BufNewFile,BufRead *.pyi set syntax=python
+
+    nnoremap <Leader>E :%!mdsh - 2>/dev/null<CR>
+
+    let g:lightline = {'colorscheme': 'orbital'}
+    let g:airline_theme='orbital'
+
+    " let g:deoplete#enable_at_startup = 1
+
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    set completeopt=noinsert,menuone,noselect
+
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+    nm <Leader>i :call FixImports()<cr>
+
+    " Run the contents of the current buffer through the fix-imports cmd.  Print
+    " any stderr output on the status line.
+    " Remove 'a' from cpoptions if you don't want this to mess up #.
+    function FixImports()
+        let out = tempname()
+        let err = tempname()
+        let tmp = tempname()
+        " Using a tmp file means I don't have to save the buffer, which the user
+        " didn't ask for.
+        execute 'write' tmp
+        execute 'silent !fix-imports -v' expand('%') '<' tmp '>' out '2>' err
+        let errs = readfile(err)
+        if v:shell_error == 0
+            " Don't replace the buffer if there's no change, this way I won't
+            " mess up fold and undo state.
+            call system('cmp -s ' . tmp . ' ' . out)
+            if v:shell_error != 0
+                " Is there an easier way to replace the buffer with a file?
+                let old_line = line('.')
+                let old_col = col('.')
+                let old_total = line('$')
+                %d
+                execute 'silent :read' out
+                0d
+                let new_total = line('$')
+                " If the import fix added or removed lines I need to take that
+                " into account.  This will be wrong if the cursor was above the
+                " import block.
+                call cursor(old_line + (new_total - old_total), old_col)
+                " The reload will forget fold state.  It was open, right?
+                if foldclosed('.') != -1
+                    execute 'normal zO'
+                endif
+            endif
+        endif
+        call delete(out)
+        call delete(err)
+        call delete(tmp)
+        redraw!
+        if !empty(errs)
+            echohl WarningMsg
+            echo join(errs)
+            echohl None
+        endif
+    endfunction
+
+    if !exists('g:lasttab')
+      let g:lasttab = 1
+    endif
+    nmap gl :exe "tabn ".g:lasttab<CR>
+    au TabLeave * let g:lasttab = tabpagenr()
+
+    nmap <C-k> [e
+    nmap <C-j> ]e
+    vmap <C-k> [egv
+    vmap <C-j> ]egv
+
+    nmap <silent> gN <Plug>(coc-diagnostic-prev)
+    nmap <silent> gn <Plug>(coc-diagnostic-next)
+
+    " Remap for rename current word
+    nmap <leader>rn <Plug>(coc-rename)
+
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    "
+    " if hidden is not set, TextEdit might fail.
+    set hidden
+
+    " Some servers have issues with backup files, see digital-asset/daml#649
+    set nobackup
+    set nowritebackup
+
+    " Better display for messages
+    set cmdheight=2
+
+    " You will have bad experience for diagnostic messages when it's default 4000.
+    set updatetime=300
+
+    " don't give |ins-completion-menu| messages.
+    set shortmess+=c
+
+    " always show signcolumns
+    set signcolumn=yes
+
+
+    " Use K to show documentation in preview window
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+    " Remap for do codeAction of current line
+    nmap <leader>ac  <Plug>(coc-codeaction)
+    " Fix autofix problem of current line
+    nmap <leader>qf  <Plug>(coc-fix-current)
+
+    let g:qs_highlight_on_keys = ['f', 'F']
+    let g:qs_enable=1
+
+
+  '';
+  nvim = pkgs.neovim.override {
+    vimAlias = true;
+    configure = {
+      packages.thisPackage.start = [ pkgs.vimPlugins.vim-nix ];
+      customRC = custRC;
+      vam.knownPlugins = pkgs.vimPlugins;
+      vam.pluginDictionaries = [{
+        names = [
+          "Syntastic"
+          "ctrlp"
+          "nerdtree"
+          "nerdcommenter"
+          "vim-multiple-cursors"
+          "UltiSnips"
+          "surround"
+          "fugitive"
+          "goyo"
+          "vim-orgmode"
+          "vim-snippets"
+          "vim-dirdiff"
+          "vim-speeddating"
+          "vim-hdevtools"
+          "vim-indent-guides"
+          "vim-repeat"
+          "lushtags"
+          "tagbar"
+          "ale"
+          "syntastic"
+          "calendar-vim"
+          "vim-localvimrc"
+          "vim-airline"
+          #"LanguageClient-neovim"
+          "deoplete-nvim"
+          "nerdtree-git-plugin"
+          "haskell-vim"
+          "unite-vim"
+          "gitv"
+        ];
+      }];
+    };
+  };
+  overrider = o: {
+    buildCommand = o.buildCommand + ''
+      ln -s $out/bin/nvim $out/bin/v
+    '';
+  };
+in nvim.overrideAttrs overrider

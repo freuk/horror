@@ -1,0 +1,5 @@
+# Weeder configuration file
+# https://github.com/ndmitchell/weeder
+##########################
+
+- message: Module reused between components
