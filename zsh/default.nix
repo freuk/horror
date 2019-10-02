@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ranger }:
 let
   zaw = ./zaw;
   zshrc = pkgs.writeText "zshrc" ''
@@ -202,13 +202,24 @@ let
     local p_path='%B%F{white}:%F{white}%~%B%F{178}'
     local p_exitcode='%F{green}%?%(!.%F{cyan}>.%b%F{green}>)%b%f '
     PROMPT='$(prompt_nix_shell)$p_machine$p_path''${vcs_info_msg_0_}$p_exitcode'
+
+    _ranger () {
+    PYTHONPATH= command ${ranger}/bin/ranger "$(pwd)"<$TTY
+    print -n "\033[A"
+    zle && zle -I
+    cd "$(grep \^\' ${builtins.toPath ./ranger}/bookmarks | cut -b3-)"
+    }
+
+    zle -N _ranger
+    bindkey -v '^N' _ranger
+
   '';
 
   zdotdir = pkgs.stdenv.mkDerivation {
     name = "zdotdir";
     installPhase = ''
       mkdir $out
-      cp ${zshrc} $out/
+      cp ${zshrc} $out/.zshrc
     '';
     phases = [ "installPhase" ];
   };
