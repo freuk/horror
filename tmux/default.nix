@@ -82,8 +82,8 @@ in pkgs.stdenv.mkDerivation {
   buildInputs = [pkgs.tmux];
   installPhase = ''
     mkdir -p $out/bin
-    ln -s ${pkgs.writeScriptBin "tm" "${pkgs.tmux}/bin/tmux -2 -L aoe -f ${conf}"}/bin/tm $out/bin/tm
-    ln -s ${pkgs.writeScriptBin "ta" "${pkgs.tmux}/bin/tmux -L aoe attach -t"}/bin/ta $out/bin/ta
+    ln -s ${pkgs.writeScriptBin "tm" "${pkgs.tmux}/bin/tmux -2 -L aoe -f ${conf} $@"}/bin/tm $out/bin/tm
+    ln -s ${pkgs.writeScriptBin "ta" "${pkgs.tmux}/bin/tmux -L aoe attach -t $@"}/bin/ta $out/bin/ta
   '';
   phases = [ "installPhase" ];
 }
