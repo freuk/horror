@@ -5,9 +5,10 @@ let callPackage = pkgs.lib.callPackageWith pkgs;
 in rec {
   inherit (pkgs)
     nix-zsh-completions fasd zsh-completions zsh-navigation-tools direnv ripgrep
-    exa atool poppler_utils nixfmt;
+    exa atool poppler_utils nixfmt hwloc htop;
 
   vim = callPackage ./vim { };
+  tig = callPackage ./tig { };
   tmux = callPackage ./tmux { };
   zsh = callPackage ./zsh { inherit tmux ranger; };
   ranger = callPackage ./ranger { };

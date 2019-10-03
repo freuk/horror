@@ -1,6 +1,6 @@
 # horror
 
-small headless dev env
+a small headless dev env
 
 ```
 curl https://nixos.org/nix/install | sh
