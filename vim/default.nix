@@ -1,4 +1,4 @@
-{ lib, neovim, vimPlugins }:
+{ lib, neovim, vimPlugins, symlinkJoin, writeScriptBin }:
 
 with lib;
 let
@@ -495,9 +495,7 @@ let
       }];
     };
   };
-  overrider = o: {
-    buildCommand = o.buildCommand + ''
-      ln -s $out/bin/nvim $out/bin/v
-    '';
-  };
-in nvim.overrideAttrs overrider
+in symlinkJoin {
+  name = "vim";
+  paths = [nvim.out (writeScriptBin "v" "${nvim}/bin/nvim $@").out];
+}
