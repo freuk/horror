@@ -1,4 +1,4 @@
-{ stdenv, lib, writeText, writeScriptBin, tmuxPlugins, bash, tmux }:
+{ stdenv, lib, writeText, writeScriptBin, tmuxPlugins, bash, tmux , symlinkJoin}:
 with lib;
 let
 
@@ -77,20 +77,11 @@ let
     + "${lib.concatStrings (map (x: ''
       run-shell ${x.rtp}
     '') plugins)}");
-in stdenv.mkDerivation {
+
+  alias-tm = writeScriptBin "tm" "${tmux}/bin/tmux -2 -L aoe -f ${conf} $@";
+  alias-ta = writeScriptBin "ta" "${tmux}/bin/tmux -L aoe attach -t $@";
+
+in symlinkJoin {
   name = "tmux";
-  buildInputs = [ tmux ];
-  installPhase = ''
-    mkdir -p $out/bin
-    ln -s ${
-      writeScriptBin "tm" "${tmux}/bin/tmux -2 -L aoe -f ${conf} $@"
-    }/bin/tm $out/bin/tm
-    ln -s ${
-      writeScriptBin "ta" "${tmux}/bin/tmux -L aoe attach -t $@"
-    }/bin/ta $out/bin/tmux
-    ln -s ${
-      writeScriptBin "tm" "${tmux}/bin/tmux -2 -L aoe -f ${conf} $@"
-    }/bin/tmux $out/bin/tmux
-  '';
-  phases = [ "installPhase" ];
+  paths = [ tmux.out alias-tm.out alias-ta.out ];
 }
