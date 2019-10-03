@@ -1,4 +1,4 @@
-a small headless dev env
+headless tools
 
 ```
 curl https://nixos.org/nix/install | sh
