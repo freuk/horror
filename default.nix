@@ -5,7 +5,7 @@ let callPackage = pkgs.lib.callPackageWith pkgs;
 in rec {
   inherit (pkgs)
     nix-zsh-completions fasd zsh-completions zsh-navigation-tools direnv ripgrep
-    exa atool poppler_utils nixfmt hwloc htop git;
+    exa atool poppler_utils nixfmt hwloc htop git tree;
 
   vim = callPackage ./vim { };
   tig = callPackage ./tig { };
