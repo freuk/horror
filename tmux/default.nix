@@ -1,5 +1,5 @@
-{ pkgs }:
-with pkgs.lib;
+{ stdenv, lib, writeText, writeScriptBin, tmuxPlugins, bash, tmux }:
+with lib;
 let
 
   rtpPath = "share/tmux-plugins";
@@ -36,7 +36,7 @@ let
 
     ... }:
 
-    addRtp "${rtpPath}/${path}" rtpFilePath a (pkgs.stdenv.mkDerivation (a // {
+    addRtp "${rtpPath}/${path}" rtpFilePath a (stdenv.mkDerivation (a // {
 
       name = namePrefix + pluginName;
 
@@ -56,7 +56,7 @@ let
         runHook postInstall
       '';
 
-      dependencies = [ pkgs.bash ] ++ dependencies;
+      dependencies = [ bash ] ++ dependencies;
     }));
 
   myYank = mkDerivation {
@@ -64,7 +64,7 @@ let
     src = (builtins.fetchTarball
       "https://github.com/tmux-plugins/tmux-yank/archive/v2.3.0.tar.gz");
   };
-  plugins = with pkgs.tmuxPlugins; [
+  plugins = with tmuxPlugins; [
     resurrect
     pain-control
     copycat
@@ -73,17 +73,21 @@ let
     prefix-highlight
     myYank
   ];
-  conf = pkgs.writeText "tmux.conf" ((builtins.readFile ./tmux.cfg)
-    + "${pkgs.lib.concatStrings (map (x: ''
+  conf = writeText "tmux.conf" ((builtins.readFile ./tmux.cfg)
+    + "${lib.concatStrings (map (x: ''
       run-shell ${x.rtp}
     '') plugins)}");
-in pkgs.stdenv.mkDerivation {
+in stdenv.mkDerivation {
   name = "tmux";
-  buildInputs = [pkgs.tmux];
+  buildInputs = [ tmux ];
   installPhase = ''
     mkdir -p $out/bin
-    ln -s ${pkgs.writeScriptBin "tm" "${pkgs.tmux}/bin/tmux -2 -L aoe -f ${conf} $@"}/bin/tm $out/bin/tm
-    ln -s ${pkgs.writeScriptBin "ta" "${pkgs.tmux}/bin/tmux -L aoe attach -t $@"}/bin/ta $out/bin/ta
+    ln -s ${
+      writeScriptBin "tm" "${tmux}/bin/tmux -2 -L aoe -f ${conf} $@"
+    }/bin/tm $out/bin/tm
+    ln -s ${
+      writeScriptBin "ta" "${tmux}/bin/tmux -L aoe attach -t $@"
+    }/bin/ta $out/bin/ta
   '';
   phases = [ "installPhase" ];
 }

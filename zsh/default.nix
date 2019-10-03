@@ -1,7 +1,7 @@
-{ pkgs, ranger }:
+{ stdenv, writeScriptBin, writeText, direnv, fasd, tmux, ranger, zsh }:
 let
   zaw = ./zaw;
-  zshrc = pkgs.writeText "zshrc" ''
+  zshrc = writeText "zshrc" ''
     export DIRENV_LOG_FORMAT=
     export HISTFILE=~/.zsh_history
     export HISTSIZE=100000
@@ -123,15 +123,15 @@ let
     }
 
 
-    eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+    eval "$(${direnv}/bin/direnv hook zsh)"
 
-    eval "$(${pkgs.fasd}/bin/fasd --init auto)"
+    eval "$(${fasd}/bin/fasd --init auto)"
 
     _cappane () {
-    command ${pkgs.tmux}/bin/tmux capture-pane -pS -0 | v -
+    command ${tmux}/bin/tmux capture-pane -pS -0 | v -
     #print -n "\033[A"
     #zle && zle -I
-    #cd "$(grep \^\' ${builtins.toPath ./ranger}/bookmarks | cut -b3-)"
+    #cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
     }
 
     zle -N _cappane
@@ -207,7 +207,7 @@ let
     PYTHONPATH= command ${ranger}/bin/ranger "$(pwd)"<$TTY
     print -n "\033[A"
     zle && zle -I
-    cd "$(grep \^\' ${builtins.toPath ./ranger}/bookmarks | cut -b3-)"
+    cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
     }
 
     zle -N _ranger
@@ -215,7 +215,7 @@ let
 
   '';
 
-  zdotdir = pkgs.stdenv.mkDerivation {
+  zdotdir = stdenv.mkDerivation {
     name = "zdotdir";
     installPhase = ''
       mkdir $out
@@ -223,4 +223,4 @@ let
     '';
     phases = [ "installPhase" ];
   };
-in pkgs.writeScriptBin "z" "ZDOTDIR=${zdotdir} ${pkgs.zsh}/bin/zsh $@"
+in writeScriptBin "z" "ZDOTDIR=${zdotdir} ${zsh}/bin/zsh $@"

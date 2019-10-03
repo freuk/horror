@@ -1,6 +1,6 @@
-{ pkgs }:
+{ lib, neovim, vimPlugins }:
 
-with pkgs.lib;
+with lib;
 let
   custRC = ''
     filetype plugin indent on
@@ -454,12 +454,12 @@ let
 
 
   '';
-  nvim = pkgs.neovim.override {
+  nvim = neovim.override {
     vimAlias = true;
     configure = {
-      packages.thisPackage.start = [ pkgs.vimPlugins.vim-nix ];
+      packages.thisPackage.start = [ vimPlugins.vim-nix ];
       customRC = custRC;
-      vam.knownPlugins = pkgs.vimPlugins;
+      vam.knownPlugins = vimPlugins;
       vam.pluginDictionaries = [{
         names = [
           "Syntastic"
