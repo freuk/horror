@@ -87,7 +87,10 @@ in stdenv.mkDerivation {
     }/bin/tm $out/bin/tm
     ln -s ${
       writeScriptBin "ta" "${tmux}/bin/tmux -L aoe attach -t $@"
-    }/bin/ta $out/bin/ta
+    }/bin/ta $out/bin/tmux
+    ln -s ${
+      writeScriptBin "tm" "${tmux}/bin/tmux -2 -L aoe -f ${conf} $@"
+    }/bin/tmux $out/bin/tmux
   '';
   phases = [ "installPhase" ];
 }

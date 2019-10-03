@@ -234,4 +234,4 @@ let
     '';
     phases = [ "installPhase" ];
   };
-in writeScriptBin "z" "ZDOTDIR=${zdotdir} ${zsh}/bin/zsh $@"
+in writeScriptBin "zsh" "ZDOTDIR=${zdotdir} ${zsh}/bin/zsh $@"
