@@ -2,8 +2,8 @@
 let
   zaw = ./zaw;
   zshrc = writeText "zshrc" ''
-    export  EDITOR = "v"
-    export  PAGER = "less"
+    export  EDITOR="v"
+    export  PAGER="less"
 
     export DIRENV_LOG_FORMAT=
     export HISTFILE=~/.zsh_history
@@ -189,7 +189,7 @@ let
     }
 
     alias ls='exa'
-    alias ll='exa-l'
+    alias ll='exa -l'
     alias l='exa -la'
 
     autoload -Uz vcs_info
