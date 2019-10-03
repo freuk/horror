@@ -1,5 +1,3 @@
-# horror
-
 a small headless dev env
 
 ```
