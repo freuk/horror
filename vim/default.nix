@@ -487,7 +487,7 @@ let
           "vim-airline"
           #"LanguageClient-neovim"
           "deoplete-nvim"
-          "nerdtree-git-plugin"
+          #"nerdtree-git-plugin"
           "haskell-vim"
           "unite-vim"
           "gitv"
@@ -497,5 +497,5 @@ let
   };
 in symlinkJoin {
   name = "vim";
-  paths = [nvim.out (writeShellScriptBin "v" "${nvim}/bin/nvim $@").out];
+  paths = [ nvim.out (writeShellScriptBin "v" "${nvim}/bin/nvim $@").out ];
 }
