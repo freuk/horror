@@ -213,6 +213,14 @@ let
     zle -N _ranger
     bindkey -v '^N' _ranger
 
+    _kglog () {
+    command t-glog <$TTY
+    zle && zle -I
+    }
+
+    zle -N _kglog
+    bindkey -v '^G' _kglog
+
   '';
 
   zdotdir = stdenv.mkDerivation {
