@@ -3,8 +3,6 @@ let
   zaw = ./zaw;
   zshrc = writeText "zshrc" ''
     export  EDITOR = "v"
-    export  SHELL = "z"
-    export  TERM = "xterm-256color"
     export  PAGER = "less"
 
     export DIRENV_LOG_FORMAT=
