@@ -1,4 +1,4 @@
-{ stdenv, writeScriptBin, writeText, direnv, fasd, tmux, ranger, zsh }:
+{ stdenv, writeShellScriptBin, writeText, direnv, fasd, tmux, ranger, zsh }:
 let
   zaw = ./zaw;
   zshrc = writeText "zshrc" ''
@@ -234,4 +234,4 @@ let
     '';
     phases = [ "installPhase" ];
   };
-in writeScriptBin "zsh" "ZDOTDIR=${zdotdir} ${zsh}/bin/zsh $@"
+in writeShellScriptBin "zsh" "ZDOTDIR=${zdotdir} ${zsh}/bin/zsh $@"

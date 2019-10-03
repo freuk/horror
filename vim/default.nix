@@ -1,4 +1,4 @@
-{ lib, neovim, vimPlugins, symlinkJoin, writeScriptBin }:
+{ lib, neovim, vimPlugins, symlinkJoin, writeShellScriptBin }:
 
 with lib;
 let
@@ -497,5 +497,5 @@ let
   };
 in symlinkJoin {
   name = "vim";
-  paths = [nvim.out (writeScriptBin "v" "${nvim}/bin/nvim $@").out];
+  paths = [nvim.out (writeShellScriptBin "v" "${nvim}/bin/nvim $@").out];
 }

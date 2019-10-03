@@ -1,4 +1,4 @@
-{ stdenv, lib, writeText, writeScriptBin, tmuxPlugins, bash, tmux , symlinkJoin}:
+{ stdenv, lib, writeText, writeShellScriptBin, tmuxPlugins, bash, tmux , symlinkJoin}:
 with lib;
 let
 
@@ -78,8 +78,8 @@ let
       run-shell ${x.rtp}
     '') plugins)}");
 
-  alias-tm = writeScriptBin "tm" "${tmux}/bin/tmux -2 -L aoe -f ${conf} $@";
-  alias-ta = writeScriptBin "ta" "${tmux}/bin/tmux -L aoe attach -t $@";
+  alias-tm = writeShellScriptBin "tm" "${tmux}/bin/tmux -2 -L aoe -f ${conf} $@";
+  alias-ta = writeShellScriptBin "ta" "${tmux}/bin/tmux -L aoe attach -t $@";
 
 in symlinkJoin {
   name = "tmux";

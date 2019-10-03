@@ -1,6 +1,6 @@
-{ ranger, writeScriptBin, symlinkJoin, stdenv }:
+{ ranger, writeShellScriptBin, symlinkJoin, stdenv }:
 let
-  ranger-conf = writeScriptBin "ranger"
+  ranger-conf = writeShellScriptBin "ranger"
     "${ranger}/bin/ranger --confdir=${builtins.toPath ./ranger} $@";
   scope = stdenv.mkDerivation {
     name = "scope";
