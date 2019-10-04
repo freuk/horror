@@ -56,6 +56,7 @@ let
     ${p "direnv/direnv.vim"}
     ${p "sk1418/HowMuch"}
     ${p "gaalcaras/ncm-R"}
+    ${p "brooth/far.vim"}
     ${p "AndrewRadev/sideways.vim"}
     ${p "fcpg/vim-spotlightify"}
     ${p "fcpg/vim-fahrenheit"}
@@ -418,6 +419,7 @@ let
     let g:qs_highlight_on_keys = ['f', 'F']
     let g:qs_enable=1
 
+    let g:far#source = 'rg'
 
   '';
   nvim = neovim.override {
