@@ -44,6 +44,28 @@ let
     set showtabline=1
     set cole=0
 
+    ${p "AndrewRadev/linediff.vim"}
+    ${p "bkad/CamelCaseMotion"}
+    ${p "kana/vim-submode"}
+    ${p "taku-o/vim-toggle"}
+    ${p "lilydjwg/colorizer"}
+    ${p "prabirshrestha/async.vim"}
+    ${p "vmchale/dhall-vim"}
+    ${p "t9md/vim-quickhl"}
+    ${p "inkarkat/vim-ingo-library"}
+    ${p "direnv/direnv.vim"}
+    ${p "sk1418/HowMuch"}
+    ${p "gaalcaras/ncm-R"}
+    ${p "AndrewRadev/sideways.vim"}
+    ${p "fcpg/vim-spotlightify"}
+    ${p "fcpg/vim-fahrenheit"}
+    ${p "fcpg/vim-orbital"}
+    ${p "jremmen/vim-ripgrep"}
+
+    set rtp+=${./vim-nerdtree-syntax-highlight}
+    set rtp+=${./vim-devicons}
+    set rtp+=${./neoformat}
+
     let mapleader = "-"
 
     nnoremap <Leader><Leader> :noh<cr>
@@ -168,27 +190,6 @@ let
     nmap <Space>M <Plug>(quickhl-manual-reset)
     xmap <Space>M <Plug>(quickhl-manual-reset)
 
-    ${p "AndrewRadev/linediff.vim"}
-    ${p "bkad/CamelCaseMotion"}
-    ${p "kana/vim-submode"}
-    ${p "taku-o/vim-toggle"}
-    ${p "lilydjwg/colorizer"}
-    ${p "prabirshrestha/async.vim"}
-    ${p "vmchale/dhall-vim"}
-    ${p "t9md/vim-quickhl"}
-    ${p "inkarkat/vim-ingo-library"}
-    ${p "direnv/direnv.vim"}
-    ${p "sk1418/HowMuch"}
-    ${p "gaalcaras/ncm-R"}
-    ${p "AndrewRadev/sideways.vim"}
-    ${p "fcpg/vim-spotlightify"}
-    ${p "fcpg/vim-fahrenheit"}
-    ${p "fcpg/vim-orbital"}
-    ${p "jremmen/vim-ripgrep"}
-
-    set rtp+=${./vim-nerdtree-syntax-highlight}
-    set rtp+=${./vim-devicons}
-    set rtp+=${./neoformat}
 
     autocmd BufEnter *.dh :setlocal filetype=dhall
     autocmd BufEnter *.dhall :setlocal filetype=dhall
