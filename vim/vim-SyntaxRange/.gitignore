@@ -1,5 +1,0 @@
-*.msgout
-*.out
-*.tap
-doc/*.description
-doc/*.install

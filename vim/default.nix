@@ -2,6 +2,10 @@
 
 with lib;
 let
+  p = x:
+    "set rtp+=${
+      builtins.fetchTarball "https://github.com/${x}/archive/master.tar.gz"
+    }";
   custRC = ''
     filetype plugin indent on
     syntax on
@@ -145,16 +149,6 @@ let
     nnoremap <space>g :Rs<cr>
     nnoremap <space>s :Rg<Space>
 
-    set rtp+=${
-      builtins.fetchTarball
-      "https://github.com/AndrewRadev/linediff.vim/archive/master.tar.gz"
-    }
-
-    set rtp+=${
-      builtins.fetchTarball
-      "https://github.com/bkad/CamelCaseMotion/archive/master.tar.gz"
-    }
-
     call camelcasemotion#CreateMotionMappings('<leader>')
     map <silent> w <Plug>CamelCaseMotion_w
     map <silent> b <Plug>CamelCaseMotion_b
@@ -165,14 +159,6 @@ let
     sunmap e
     sunmap ge
 
-    set rtp+=${./rgrin}
-    set rtp+=${./vim-orbital}
-    set rtp+=${./tabular}
-    set rtp+=${./vim-jdaddy}
-    set rtp+=${./colo}
-    set rtp+=${./elm-vim}
-    set rtp+=${./direnv.vim}
-    set rtp+=${./tla.vim}
     nmap <Space>m <Plug>(quickhl-manual-this)
     xmap <Space>m <Plug>(quickhl-manual-this)
     nmap <Space>w <Plug>(quickhl-manual-this-whole-word)
@@ -181,54 +167,32 @@ let
     vmap <Space>c <Plug>(quickhl-manual-clear)
     nmap <Space>M <Plug>(quickhl-manual-reset)
     xmap <Space>M <Plug>(quickhl-manual-reset)
-    set rtp+=${./Colorizer}
-    set rtp+=${./neoformat}
-    set rtp+=${./vim-toggle}
-    set rtp+=${./vim-slime}
-    set rtp+=${./hlint-refactor-vim}
-    set rtp+=${./rainbow}
-    set rtp+=${./ghcid}
-    set rtp+=${./vim-hoogle}
-    set rtp+=${./vim-farout}
-    set rtp+=${./vim-fahrenheit}
-    set rtp+=${./vim-spotlightify}
-    set rtp+=${./HowMuch}
-    set rtp+=${./vim-exchange}
-    set rtp+=${./async.vim}
-    set rtp+=${./vim-nerdtree-syntax-highlight}
-    set rtp+=${./unite-haskellimport}
-    set rtp+=${./vim-better-whitespace}
-    set rtp+=${./unite-haddock}
-    let g:unite_source_haddock_browser = 'firefox'
-    set rtp+=${./vim-localvimrc}
-    set rtp+=${./vim-unimpaired}
-    set rtp+=${./vim-SyntaxRange}
-    set rtp+=${./vim-ingo-library}
 
-    set rtp+=${./dhall-vim}
+    ${p "AndrewRadev/linediff.vim"}
+    ${p "bkad/CamelCaseMotion"}
+    ${p "kana/vim-submode"}
+    ${p "taku-o/vim-toggle"}
+    ${p "lilydjwg/colorizer"}
+    ${p "prabirshrestha/async.vim"}
+    ${p "vmchale/dhall-vim"}
+    ${p "t9md/vim-quickhl"}
+    ${p "inkarkat/vim-ingo-library"}
+    ${p "direnv/direnv.vim"}
+    ${p "sk1418/HowMuch"}
+    ${p "gaalcaras/ncm-R"}
+    ${p "AndrewRadev/sideways.vim"}
+    ${p "fcpg/vim-spotlightify"}
+    ${p "fcpg/vim-fahrenheit"}
+    ${p "fcpg/vim-orbital"}
+    ${p "jremmen/vim-ripgrep"}
+    set rtp+=${./vim-nerdtree-syntax-highlight}
+    set rtp+=${./vim-devicons}
+    set rtp+=${./neoformat}
+
     autocmd BufEnter *.dh :setlocal filetype=dhall
     autocmd BufEnter *.dhall :setlocal filetype=dhall
     autocmd BufEnter *.tex :set spell
 
-    set rtp+=${./val_snippets}
-    set rtp+=${./vim-sneak}
-    set rtp+=${./simpleblack}
-    set rtp+=${./ncm-R}
-    set rtp+=${./Nvim-R}
-    let R_assign = 0
-    set rtp+=${./nvim-yarp}
-    set rtp+=${./ncm2}
-    set rtp+=${./ncm2-ultisnips}
-    set rtp+=${./ncm2-path}
-    "set rtp+=${./coc.nvim}
-
-    set rtp+=${./vim-ripgrep}
-
-    set rtp+=${./sideways.vim}
-
-    set rtp+=${./vim-devicons}
-
-    set rtp+=${./vim-submode}
     call submode#enter_with('fieldtrip', 'n', ''', '<leader>a', '<nop>')
     call submode#map('fieldtrip', 'n', ''', 'H', ':SidewaysLeft<cr>')
     call submode#map('fieldtrip', 'n', ''', 'L', ':SidewaysRight<cr>')
@@ -416,6 +380,14 @@ let
     " Some servers have issues with backup files, see digital-asset/daml#649
     set nobackup
     set nowritebackup
+    set rtp+=${./rgrin}
+    set rtp+=${./vim-orbital}
+    set rtp+=${./tabular}
+    set rtp+=${./vim-jdaddy}
+    set rtp+=${./colo}
+    set rtp+=${./elm-vim}
+    set rtp+=${./direnv.vim}
+    set rtp+=${./tla.vim}
 
     " Better display for messages
     set cmdheight=2
@@ -485,12 +457,29 @@ let
           "calendar-vim"
           "vim-localvimrc"
           "vim-airline"
-          #"LanguageClient-neovim"
+          "vim-sneak"
+          "vim-slime"
           "deoplete-nvim"
-          #"nerdtree-git-plugin"
           "haskell-vim"
           "unite-vim"
+          "vim-unimpaired"
+          "vim-SyntaxRange"
           "gitv"
+          "elm-vim"
+          "ghcid"
+          "haskell-vim"
+          "hlint-refactor-vim"
+          "ncm2"
+          "ncm2-path"
+          "ncm2-ultisnips"
+          "nvim-yarp"
+          "rainbow"
+          "tabular"
+          "vim-better-whitespace"
+          "vim-exchange"
+          "vim-hdevtools"
+          "vim-hoogle"
+          "vim-localvimrc"
         ];
       }];
     };
