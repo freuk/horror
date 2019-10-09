@@ -69,6 +69,7 @@ let
 
     let mapleader = "-"
 
+    vnoremap Z :w<cr>
     nnoremap <Leader><Leader> :noh<cr>
 
     "quickfix navigation
@@ -144,13 +145,6 @@ let
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_tex_lacheck_quiet_messages = { 'regex': '\Vpossible unwanted space at' }
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_haskell_checkers = []
 
     " fugitive git bindings
     nnoremap <space>ga :Git add %:p<CR><CR>
@@ -277,7 +271,6 @@ let
     let g:haskell_disable_TH = 0
 
     let g:hdevtools_options = '-g-Wall -S -g-fdefer-type-errors'
-    let g:syntastic_haskell_hdevtools_args = '-g-Wall -S -g-fdefer-type-errors'
 
     nnoremap <leader>hI :execute "Unite -start-insert haskellimport"<CR>
 
@@ -289,7 +282,6 @@ let
 
     let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ], 'haskell': ['hlint']}
     let g:ale_completion_enabled = 0
-    let g:loaded_syntastic_nroff_proselint_checker = 1
 
     autocmd BufNewFile,BufRead *.pyi set syntax=python
 
@@ -449,7 +441,6 @@ let
           "lushtags"
           "tagbar"
           "ale"
-          "syntastic"
           "calendar-vim"
           "vim-localvimrc"
           "vim-airline"
