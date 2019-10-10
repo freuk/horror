@@ -44,6 +44,8 @@ let
     set showtabline=1
     set cole=0
 
+    ${p "francoiscabrol/ranger.vim"}
+    ${p "rbgrouleff/bclose.vim"}
     ${p "AndrewRadev/linediff.vim"}
     ${p "bkad/CamelCaseMotion"}
     ${p "kana/vim-submode"}
@@ -63,7 +65,6 @@ let
     ${p "fcpg/vim-orbital"}
     ${p "jremmen/vim-ripgrep"}
 
-    set rtp+=${./vim-nerdtree-syntax-highlight}
     set rtp+=${./vim-devicons}
     set rtp+=${./neoformat}
 
@@ -94,7 +95,6 @@ let
     nnoremap <Leader>r :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i"
     cmap w!! w !sudo tee> /dev/null %
     nnoremap m :nohlsearch<Bar>:echo<CR>
-    nmap T :NERDTreeToggle<CR>
 
     let g:move_key_modifier = 'C'
 
@@ -280,7 +280,7 @@ let
 
     let g:rainbow_active = 0
 
-    let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ], 'haskell': ['hlint']}
+    let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ]}
     let g:ale_completion_enabled = 0
 
     autocmd BufNewFile,BufRead *.pyi set syntax=python
@@ -424,7 +424,6 @@ let
         names = [
           "Syntastic"
           "ctrlp"
-          "nerdtree"
           "nerdcommenter"
           "vim-multiple-cursors"
           "UltiSnips"
