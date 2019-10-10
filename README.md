@@ -1,7 +1,7 @@
 headless tools
 
 ```
-curl https://nixos.org/nix/install | sh
-nix-env -f https://github.com/freuk/horror/archive/master.zip -i
-echo "export SHELL=z && exec zsh -l" >> ~/.bash_profile
+$ curl https://nixos.org/nix/install | sh
+$ nix-env -f https://github.com/freuk/horror/archive/master.tar.gz -i
+$ horrorsetup # which is defined in default.nix
 ```

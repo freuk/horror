@@ -134,7 +134,7 @@ let
     command ${tmux}/bin/tmux capture-pane -pS -0 | v -
     #print -n "\033[A"
     #zle && zle -I
-    #cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+    #cd "$(grep \^\' ~/.config/ranger/bookmarks | cut -b3-)"
     }
 
     zle -N _cappane
@@ -210,7 +210,7 @@ let
     command ${ranger}/bin/ranger "$(pwd)"<$TTY
     print -n "\033[A"
     zle && zle -I
-    cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+    cd "$(grep \^\' ~/.config/ranger/bookmarks | cut -b3-)"
     }
 
     zle -N _ranger
@@ -230,18 +230,18 @@ let
           command ${ranger}/bin/ranger "$1"<$TTY
           print -n "\033[A"
           zle && zle -I
-          cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+          cd "$(grep \^\' ~/.config/ranger/bookmarks | cut -b3-)"
         else
           command ${ranger}/bin/ranger "$(fasd -d $1 | cut -d' ' -f2)"<$TTY
           print -n "\033[A"
           zle && zle -I
-          cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+          cd "$(grep \^\' ~/.config/ranger/bookmarks | cut -b3-)"
         fi
       else
         command ${ranger}/bin/ranger "$pwd"<$TTY
         print -n "\033[A"
         zle && zle -I
-        cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+        cd "$(grep \^\' ~/.config/ranger/bookmarks | cut -b3-)"
       fi
       return $?
     }
