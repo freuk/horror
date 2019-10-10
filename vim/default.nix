@@ -1,10 +1,19 @@
-{ lib, neovim, vimPlugins, symlinkJoin, writeShellScriptBin }:
+{ lib, neovim, vimPlugins, symlinkJoin, writeShellScriptBin, fetchgit }:
 
 with lib;
 let
   p = x:
     "set rtp+=${
       builtins.fetchTarball "https://github.com/${x}/archive/master.tar.gz"
+    }";
+  psubmodule = x: sha: rev:
+    "set rtp+=${
+      fetchgit {
+        url = "https://github.com/${x}.git";
+        deepClone = true;
+        sha256 = sha;
+        rev = rev;
+      }
     }";
   custRC = ''
     filetype plugin indent on
@@ -44,16 +53,6 @@ let
     set showtabline=1
     set cole=0
 
-    ${p "rafaqz/ranger.vim"}
-    map <leader>rr :RangerEdit<cr>
-    map <leader>rv :RangerVSplit<cr>
-    map <leader>rs :RangerSplit<cr>
-    map <leader>rt :RangerTab<cr>
-    map <leader>ri :RangerInsert<cr>
-    map <leader>ra :RangerAppend<cr>
-    map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
-    map <leader>rd :RangerCD<cr>
-    map <leader>rld :RangerLCD<cr>
     ${p "AndrewRadev/linediff.vim"}
     ${p "bkad/CamelCaseMotion"}
     ${p "kana/vim-submode"}
@@ -74,6 +73,7 @@ let
     ${p "jremmen/vim-ripgrep"}
 
     set rtp+=${./vim-devicons}
+    set rtp+=${./vim-nerdtree-syntax-highlight}
     set rtp+=${./neoformat}
 
     let mapleader = "-"
@@ -278,14 +278,6 @@ let
     let g:haskell_backpack = 1
     let g:haskell_disable_TH = 0
 
-    let g:hdevtools_options = '-g-Wall -S -g-fdefer-type-errors'
-
-    nnoremap <leader>hI :execute "Unite -start-insert haskellimport"<CR>
-
-    au FileType haskell nnoremap <buffer> <Leader>tt :HdevtoolsType<CR>
-    au FileType haskell nnoremap <buffer> <silent> <Leader>ti :HdevtoolsInfo<CR>
-    au FileType haskell nnoremap <buffer> <silent> <Leader>tc :HdevtoolsClear<CR>
-
     let g:rainbow_active = 0
 
     let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ]}
@@ -420,6 +412,8 @@ let
 
     let g:far#source = 'rg'
 
+    nmap T :NERDTreeToggle<CR>
+
   '';
   nvim = neovim.override {
     vimAlias = true;
@@ -429,7 +423,6 @@ let
       vam.knownPlugins = vimPlugins;
       vam.pluginDictionaries = [{
         names = [
-          "Syntastic"
           "ctrlp"
           "nerdcommenter"
           "vim-multiple-cursors"
@@ -441,7 +434,6 @@ let
           "vim-snippets"
           "vim-dirdiff"
           "vim-speeddating"
-          "vim-hdevtools"
           "vim-indent-guides"
           "vim-repeat"
           "lushtags"
@@ -460,7 +452,6 @@ let
           "gitv"
           "elm-vim"
           "ghcid"
-          "haskell-vim"
           "hlint-refactor-vim"
           "ncm2"
           "ncm2-path"
@@ -470,7 +461,8 @@ let
           "tabular"
           "vim-better-whitespace"
           "vim-exchange"
-          "vim-hdevtools"
+          "nerdtree"
+          "nerdtree-git-plugin"
           "vim-hoogle"
           "vim-localvimrc"
         ];
