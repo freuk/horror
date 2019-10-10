@@ -11,7 +11,7 @@ in rec {
   tig = callPackage ./tig { };
   tmux = callPackage ./tmux { };
   zsh = callPackage ./zsh { inherit tmux ranger; };
-  rangersetup = callPackage ./rangersetup { };
+  rangersetup = callPackage ./ranger { };
 
   horror = pkgs.writeShellScriptBin "horror" ''
     rangersetup && echo "export SHELL=z && exec zsh -l" >> ~/.bash_profile
