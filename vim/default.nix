@@ -44,8 +44,16 @@ let
     set showtabline=1
     set cole=0
 
-    ${p "francoiscabrol/ranger.vim"}
-    ${p "rbgrouleff/bclose.vim"}
+    ${p "rafaqz/ranger.vim"}
+    map <leader>rr :RangerEdit<cr>
+    map <leader>rv :RangerVSplit<cr>
+    map <leader>rs :RangerSplit<cr>
+    map <leader>rt :RangerTab<cr>
+    map <leader>ri :RangerInsert<cr>
+    map <leader>ra :RangerAppend<cr>
+    map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
+    map <leader>rd :RangerCD<cr>
+    map <leader>rld :RangerLCD<cr>
     ${p "AndrewRadev/linediff.vim"}
     ${p "bkad/CamelCaseMotion"}
     ${p "kana/vim-submode"}
@@ -361,7 +369,6 @@ let
     nmap <silent> gn <Plug>(coc-diagnostic-next)
 
     " Remap for rename current word
-    nmap <leader>rn <Plug>(coc-rename)
 
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)

@@ -207,7 +207,7 @@ let
     PROMPT='$(prompt_nix_shell)$p_machine$p_path''${vcs_info_msg_0_}$p_exitcode'
 
     _ranger () {
-    PYTHONPATH= command ${ranger}/bin/ranger "$(pwd)"<$TTY
+    command ${ranger}/bin/ranger "$(pwd)"<$TTY
     print -n "\033[A"
     zle && zle -I
     cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
@@ -224,6 +224,27 @@ let
     zle -N _kglog
     bindkey -v '^G' _kglog
 
+    n() {
+      if [ "$1" != "" ]; then
+        if [ -d "$1" ]; then
+          command ${ranger}/bin/ranger "$1"<$TTY
+          print -n "\033[A"
+          zle && zle -I
+          cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+        else
+          command ${ranger}/bin/ranger "$(fasd -d $1 | cut -d' ' -f2)"<$TTY
+          print -n "\033[A"
+          zle && zle -I
+          cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+        fi
+      else
+        command ${ranger}/bin/ranger "$pwd"<$TTY
+        print -n "\033[A"
+        zle && zle -I
+        cd "$(grep \^\' ${builtins.toPath ../ranger/ranger}/bookmarks | cut -b3-)"
+      fi
+      return $?
+    }
   '';
 
   zdotdir = stdenv.mkDerivation {
