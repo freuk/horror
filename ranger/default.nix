@@ -1,2 +1,2 @@
 { ranger, writeShellScriptBin }:
-writeShellScriptBin "rangersetup" "cp -r ${./config}/* ~/.config/ranger/"
+writeShellScriptBin "rangersetup" "mpkdir -p ~/.config/ranger && cp -r ${./config}/* ~/.config/ranger/"
