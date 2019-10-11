@@ -71,6 +71,7 @@ let
     ${p "fcpg/vim-fahrenheit"}
     ${p "fcpg/vim-orbital"}
     ${p "jremmen/vim-ripgrep"}
+    ${p "blindFS/vim-taskwarrior"}
 
     set rtp+=${./vim-devicons}
     set rtp+=${./vim-nerdtree-syntax-highlight}
@@ -151,7 +152,6 @@ let
           \ }
 
     set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
 
     " fugitive git bindings
