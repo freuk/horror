@@ -148,6 +148,12 @@ let
     stty -ixon
     alias j='fasd_cd -d'
 
+    alias gst='git status'
+    alias gc='git commit'
+    alias ga='git add'
+    alias gps='git push'
+    alias gpu='git pull'
+
     REPORTTIME=10
 
     source ${./zsh-syntax-highlighting-filetypes.zsh}

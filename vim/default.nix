@@ -72,6 +72,7 @@ let
     ${p "fcpg/vim-orbital"}
     ${p "jremmen/vim-ripgrep"}
     ${p "blindFS/vim-taskwarrior"}
+    let g:task_rc_override = 'rc.defaultwidth=0'
 
     set rtp+=${./vim-devicons}
     set rtp+=${./vim-nerdtree-syntax-highlight}
