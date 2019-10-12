@@ -271,7 +271,7 @@ let
 
     let g:rainbow_active = 0
 
-    let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ]}
+    let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ], 'haskell': []}
     let g:ale_completion_enabled = 0
 
     autocmd BufNewFile,BufRead *.pyi set syntax=python
