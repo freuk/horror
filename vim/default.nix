@@ -16,6 +16,8 @@ let
       }
     }";
   custRC = ''
+    let mapleader = "-"
+
     filetype plugin indent on
     syntax on
     set nocompatible
@@ -68,8 +70,13 @@ let
     ${p "brooth/far.vim"}
     ${p "AndrewRadev/sideways.vim"}
     ${p "fcpg/vim-fahrenheit"}
-    ${p "fcpg/vim-orbital"}
+    ${p "fcpg/vim-navmode"}
+    ${p "fcpg/vim-shore"}
+    nmap <leader>ts :ToggleShore<CR>
+
     ${p "fcpg/vim-showmap"}
+    let g:showmap_helpall_key = "<C-b>"
+
     ${p "fcpg/vim-spotlightify"}
     ${p "jremmen/vim-ripgrep"}
     ${p "blindFS/vim-taskwarrior"}
@@ -79,7 +86,6 @@ let
     set rtp+=${./vim-nerdtree-syntax-highlight}
     set rtp+=${./neoformat}
 
-    let mapleader = "-"
 
     vnoremap Z :w<cr>
     nnoremap <Leader><Leader> :noh<cr>
@@ -232,7 +238,6 @@ let
 
     colorscheme fahrenheit
     autocmd BufEnter * colorscheme fahrenheit
-    autocmd BufEnter *.nix colorscheme orbital
 
     vmap <C-c><C-c> <Plug>SendSelectionToTmux
     nmap <C-c><C-c> <Plug>NormalModeSendToTmux
@@ -272,17 +277,21 @@ let
 
     let g:rainbow_active = 0
 
-    let g:ale_linters = {'vim': ['vint'], 'yaml': ['yamllint'], 'mail': ['proselint','vale'], 'python': ['flake8'], 'text': ['proselint', 'vale'], 'markdown': ['proselint', 'vale' ], 'haskell': []}
+    let g:ale_linters = {'vim': ['vint'], 
+        \ 'yaml': ['yamllint'], 
+        \ 'mail': ['proselint','vale'], 
+        \ 'python': ['flake8'], 
+        \ 'text': ['proselint', 'vale'], 
+        \ 'markdown': ['proselint', 'vale' ], 
+        \ 'haskell': []}
     let g:ale_completion_enabled = 0
 
     autocmd BufNewFile,BufRead *.pyi set syntax=python
 
     nnoremap <Leader>E :%!mdsh - 2>/dev/null<CR>
 
-    let g:lightline = {'colorscheme': 'orbital'}
-    let g:airline_theme='orbital'
-
-    " let g:deoplete#enable_at_startup = 1
+    let g:lightline = {'colorscheme': 'fahrenheit'}
+    let g:airline_theme='fahrenheit'
 
     autocmd BufEnter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
@@ -404,7 +413,9 @@ let
 
     let g:far#source = 'rg'
 
-    nmap T :NERDTreeToggle<CR>
+    nmap <leader>tt :NERDTreeToggle<CR>
+    nmap <leader>tg :Goyo<CR>
+    nmap <leader>tu :UndotreeToggle<CR>
 
   '';
   nvim = neovim.override {
@@ -418,6 +429,7 @@ let
           "ctrlp"
           "nerdcommenter"
           "vim-multiple-cursors"
+          "undotree"
           "UltiSnips"
           "surround"
           "fugitive"
