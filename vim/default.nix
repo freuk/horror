@@ -67,9 +67,10 @@ let
     ${p "gaalcaras/ncm-R"}
     ${p "brooth/far.vim"}
     ${p "AndrewRadev/sideways.vim"}
-    ${p "fcpg/vim-spotlightify"}
     ${p "fcpg/vim-fahrenheit"}
     ${p "fcpg/vim-orbital"}
+    ${p "fcpg/vim-showmap"}
+    ${p "fcpg/vim-spotlightify"}
     ${p "jremmen/vim-ripgrep"}
     ${p "blindFS/vim-taskwarrior"}
     let g:task_rc_override = 'rc.defaultwidth=0'
