@@ -237,7 +237,7 @@ let
     nnoremap <Leader>w :StripWhitespace<cr>
 
     colorscheme fahrenheit
-    autocmd BufEnter * colorscheme fahrenheit
+    hi Normal guibg=NONE ctermbg=NONE
 
     vmap <C-c><C-c> <Plug>SendSelectionToTmux
     nmap <C-c><C-c> <Plug>NormalModeSendToTmux
@@ -416,6 +416,11 @@ let
     nmap <leader>tt :NERDTreeToggle<CR>
     nmap <leader>tg :Goyo<CR>
     nmap <leader>tu :UndotreeToggle<CR>
+
+    hi NonText ctermbg=none
+    hi Normal guibg=NONE ctermbg=NONE
+    hi airline_c  ctermbg=NONE guibg=NONE
+    hi airline_tabfill ctermbg=NONE guibg=NONE
 
   '';
   nvim = neovim.override {
