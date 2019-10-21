@@ -69,7 +69,6 @@ let
     ${p "gaalcaras/ncm-R"}
     ${p "brooth/far.vim"}
     ${p "AndrewRadev/sideways.vim"}
-    ${p "fcpg/vim-fahrenheit"}
     ${p "fcpg/vim-navmode"}
     ${p "fcpg/vim-shore"}
     nmap <leader>ts :ToggleShore<CR>
@@ -85,7 +84,7 @@ let
     set rtp+=${./vim-devicons}
     set rtp+=${./vim-nerdtree-syntax-highlight}
     set rtp+=${./neoformat}
-
+    set rtp+=${./vim-fahrenheit}
 
     vnoremap Z :w<cr>
     nnoremap <Leader><Leader> :noh<cr>
@@ -290,7 +289,6 @@ let
 
     nnoremap <Leader>E :%!mdsh - 2>/dev/null<CR>
 
-    let g:lightline = {'colorscheme': 'fahrenheit'}
     let g:airline_theme='fahrenheit'
 
     autocmd BufEnter * call ncm2#enable_for_buffer()
