@@ -63,6 +63,7 @@ let
     ${p "prabirshrestha/async.vim"}
     ${p "vmchale/dhall-vim"}
     ${p "t9md/vim-quickhl"}
+    ${p "freitass/todo.txt-vim"}
     ${p "inkarkat/vim-ingo-library"}
     ${p "direnv/direnv.vim"}
     ${p "sk1418/HowMuch"}
@@ -149,14 +150,15 @@ let
     let g:multi_cursor_exit_from_insert_mode=0
 
     "ctrlp
+    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
     let g:ctrlp_working_path_mode = 'ra'
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlPMixed'
-    let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/]\.(git|hg|svn)$$',
-          \ 'file': '\v\.(exe|o|p_o|hi|so|dll)$$',
-          \ 'link': 'some_bad_symbolic_links',
-          \ }
+    "let g:ctrlp_custom_ignore = {
+    "      \ 'dir':  '\v[\/]\.(git|hg|svn)$$',
+    "      \ 'file': '\v\.(exe|o|p_o|hi|so|dll)$$',
+    "      \ 'link': 'some_bad_symbolic_links',
+    "      \ }
 
     set statusline+=%#warningmsg#
     set statusline+=%*
@@ -409,7 +411,7 @@ let
     let g:qs_highlight_on_keys = ['f', 'F']
     let g:qs_enable=1
 
-    let g:far#source = 'rg'
+    let g:far#source='rg'
 
     nmap <leader>tt :NERDTreeToggle<CR>
     nmap <leader>tg :Goyo<CR>
@@ -419,8 +421,8 @@ let
     hi Normal guibg=NONE ctermbg=NONE
     hi airline_c  ctermbg=NONE guibg=NONE
     hi airline_tabfill ctermbg=NONE guibg=NONE
-
   '';
+
   nvim = neovim.override {
     vimAlias = true;
     configure = {
@@ -437,7 +439,6 @@ let
           "surround"
           "fugitive"
           "goyo"
-          "vim-orgmode"
           "vim-snippets"
           "vim-dirdiff"
           "vim-speeddating"
@@ -453,7 +454,6 @@ let
           "haskell-vim"
           "unite-vim"
           "vim-unimpaired"
-          #"vim-SyntaxRange"
           "gitv"
           "elm-vim"
           "ghcid"
