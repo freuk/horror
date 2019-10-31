@@ -14,6 +14,6 @@ in rec {
   rangersetup = callPackage ./ranger { };
 
   horror = pkgs.writeShellScriptBin "horror" ''
-    rangersetup && echo "export SHELL=z && exec zsh -l" >> ~/.bash_profile
+    rangersetup && echo "export TERM=xterm && export SHELL=zsh && exec zsh -l" >> ~/.bash_profile
   '';
 }
