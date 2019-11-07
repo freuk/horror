@@ -55,6 +55,7 @@ let
     set showtabline=1
     set cole=0
 
+
     ${p "AndrewRadev/linediff.vim"}
     ${p "bkad/CamelCaseMotion"}
     ${p "kana/vim-submode"}
@@ -66,6 +67,11 @@ let
     ${p "freitass/todo.txt-vim"}
     ${p "inkarkat/vim-ingo-library"}
     ${p "direnv/direnv.vim"}
+    let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
+    let g:LanguageClient_serverCommands = {
+        \ 'rust': ['rls'],
+        \ 'haskell': ['ghcide', '--lsp'],
+        \ }
     ${p "sk1418/HowMuch"}
     ${p "gaalcaras/ncm-R"}
     ${p "brooth/far.vim"}
@@ -243,9 +249,6 @@ let
     vmap <C-c><C-c> <Plug>SendSelectionToTmux
     nmap <C-c><C-c> <Plug>NormalModeSendToTmux
     nmap <C-c>r <Plug>SetTmuxVars
-
-    set cole=2
-    let g:tex_conceal="adgm"
 
     imap <C-t> <Plug>ToggleI
     nmap <C-t> <Plug>ToggleN
@@ -457,8 +460,8 @@ let
           "gitv"
           "elm-vim"
           "ghcid"
-          #"hlint-refactor-vim"
           "ncm2"
+          "LanguageClient-neovim"
           "ncm2-path"
           "ncm2-ultisnips"
           "nvim-yarp"

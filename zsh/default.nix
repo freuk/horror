@@ -158,14 +158,10 @@ let
 
     source ${./zsh-syntax-highlighting-filetypes.zsh}
 
-    bindkey -s "^S" "^Qnix-shell"
-    bindkey -s "^T" "^Qtm"
+    bindkey -s "^S" "^Qnix-shell "
+    bindkey -s "^B" "^Qnix-build "
+    bindkey -s "^T" "^Qtm "
 
-    #magic-shell () {
-      #exec nix-shell
-    #}
-    #zle -N magic-shell
-    #bindkey "^S" magic-shell
 
     magic-cd () {
       eval "cd .."
