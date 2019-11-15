@@ -61,6 +61,7 @@ let
     ${p "kana/vim-submode"}
     ${p "taku-o/vim-toggle"}
     ${p "lilydjwg/colorizer"}
+    ${p "junegunn/fzf"}
     ${p "prabirshrestha/async.vim"}
     ${p "vmchale/dhall-vim"}
     ${p "t9md/vim-quickhl"}
@@ -405,10 +406,8 @@ let
     "xmap <leader>a  <Plug>(coc-codeaction-selected)
     "nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-    " Remap for do codeAction of current line
-    nmap <leader>ac  <Plug>(coc-codeaction)
-    " Fix autofix problem of current line
-    nmap <leader>qf  <Plug>(coc-fix-current)
+    nmap <leader>ac :call LanguageClient_textDocument_codeAction()<CR>
+    nmap <leader>h :call LanguageClient_textDocument_hover()<CR>
 
     let g:qs_highlight_on_keys = ['f', 'F']
     let g:qs_enable=1
