@@ -64,7 +64,6 @@ let
     ${p "prabirshrestha/async.vim"}
     ${p "vmchale/dhall-vim"}
     ${p "t9md/vim-quickhl"}
-    ${p "freitass/todo.txt-vim"}
     ${p "inkarkat/vim-ingo-library"}
     ${p "direnv/direnv.vim"}
     let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
