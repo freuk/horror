@@ -86,6 +86,7 @@ let
     ${p "fcpg/vim-spotlightify"}
     ${p "jremmen/vim-ripgrep"}
     ${p "blindFS/vim-taskwarrior"}
+    ${p "/alok/notational-fzf-vim"}
     let g:task_rc_override = 'rc.defaultwidth=0'
 
     set rtp+=${./vim-devicons}
