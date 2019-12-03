@@ -1,5 +1,5 @@
 function! neoformat#formatters#markdown#enabled() abort
-   return ['remark', 'prettier']
+   return ['remark', 'prettier', 'mmark']
 endfunction
 
 function! neoformat#formatters#markdown#prettier() abort
@@ -16,4 +16,12 @@ function! neoformat#formatters#markdown#remark() abort
             \ 'args': ['--no-color', '--silent'],
             \ 'stdin': 1,
             \ }
+endfunction
+
+function! neoformat#formatters#markdown#mmark() abort
+    return {
+        \ 'exe': 'mmark',
+        \ 'args': [ ],
+        \ 'stdin': 1,
+        \ }
 endfunction
