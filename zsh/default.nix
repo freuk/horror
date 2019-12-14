@@ -104,18 +104,9 @@ let
     alias sudo="sudo env PATH=$PATH"
     alias sudo="nocorrect sudo"
     alias man="nocorrect man"
-    alias fucking='sudo'
+    alias fkn='sudo'
     alias mv='nocorrect mv'
     alias mkdir='nocorrect mkdir'
-
-    alias in='task add +in 2>/dev/null'
-    alias in-report='task in 2>/dev/null'
-    tickle () {
-        deadline=$1
-        shift
-        in +tickle wait:$deadline $@
-    }
-    alias think='tickle +1d'
 
     fignore=(.ali .o .toc .aux .swp)
 
