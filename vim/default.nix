@@ -43,8 +43,8 @@ let
     set softtabstop=2
     set shiftwidth=2
     set expandtab
-    set nocursorline
-    set nocursorcolumn
+    set cursorline
+    set cursorcolumn
     set scrolljump=5
     set lazyredraw
     set synmaxcol=180
@@ -163,14 +163,13 @@ let
     let g:multi_cursor_exit_from_insert_mode=0
 
     "ctrlp
-    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+    let g:ctrlp_user_command = ['.git/', 'git ls-files -oc --exclude-standard']
     let g:ctrlp_working_path_mode = 'ra'
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlPMixed'
     "let g:ctrlp_custom_ignore = {
     "      \ 'dir':  '\v[\/]\.(git|hg|svn)$$',
-    "      \ 'file': '\v\.(exe|o|p_o|hi|so|dll)$$',
-    "      \ 'link': 'some_bad_symbolic_links',
+    "      \ 'file': '\v\.(exe|o|p_o|hi|so|dll|html)$$',
     "      \ }
 
     set statusline+=%#warningmsg#
