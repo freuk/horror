@@ -1,5 +1,9 @@
-{ pkgs ? import (builtins.fetchTarball
-  "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz") { }
+{ 
+  nixpkgs ? import <nixpkgs> {},
+
+  fetched ? s: (nixpkgs.nix-update-source.fetch s).src,
+
+  pkgs ? import (fetched ./pkgs.json) { }
 }:
 let callPackage = pkgs.lib.callPackageWith pkgs;
 in rec {

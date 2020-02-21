@@ -1,0 +1,14 @@
+{
+  "fetch": {
+    "args": {
+      "fetchSubmodules": false,
+      "rev": "8731aaaf8b30888bc24994096db830993090d7c4",
+      "sha256": "1hcc89rxi47nb0mpk05nl9rbbb04kfw97xfydhpmmgh57yrp3zqa",
+      "url": "https://github.com/nixos/nixpkgs-channels.git"
+    },
+    "fn": "fetchgit"
+  },
+  "rev": "refs/heads/nixos-19.09",
+  "type": "fetchgit",
+  "url": "https://github.com/nixos/nixpkgs-channels.git"
+}

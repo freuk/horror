@@ -51,7 +51,22 @@ let
     set noshowmode
     set noruler
     set noshowcmd
+
     set laststatus=2
+    set statusline=
+    set statusline+=%#PmenuSel#
+    set statusline+=%#LineNr#
+    set statusline+=\ %f
+    set statusline+=%m
+    set statusline+=\ %=
+    set statusline+=%#CursorColumn#
+    set statusline+=\ %y
+    set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+    set statusline+=\ \[%{&fileformat}\]
+    set statusline+=\ %p%%
+    set statusline+=\ %l:%c
+    hi StatusLine ctermbg=NONE ctermfg=NONE
+
     set showtabline=1
     set cole=0
 
@@ -59,6 +74,7 @@ let
     ${p "AndrewRadev/linediff.vim"}
     ${p "bkad/CamelCaseMotion"}
     ${p "kana/vim-submode"}
+    ${p "tommcdo/vim-exchange"}
     ${p "taku-o/vim-toggle"}
     ${p "lilydjwg/colorizer"}
     ${p "junegunn/fzf"}
@@ -95,7 +111,7 @@ let
 
     let g:task_rc_override = 'rc.defaultwidth=0'
 
-    set rtp+=${./vim-devicons}
+    "set rtp+=${./vim-devicons} "SLOW
     set rtp+=${./vim-nerdtree-syntax-highlight}
     set rtp+=${./neoformat}
     set rtp+=${./vim-fahrenheit}
@@ -172,8 +188,6 @@ let
     "      \ 'file': '\v\.(exe|o|p_o|hi|so|dll|html)$$',
     "      \ }
 
-    set statusline+=%#warningmsg#
-    set statusline+=%*
 
     " fugitive git bindings
     nnoremap <space>ga :Git add %:p<CR><CR>
@@ -300,7 +314,6 @@ let
 
     nnoremap <Leader>E :%!mdsh - 2>/dev/null<CR>
 
-    let g:airline_theme='fahrenheit'
 
     autocmd BufEnter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
@@ -426,8 +439,6 @@ let
 
     hi NonText ctermbg=none
     hi Normal guibg=NONE ctermbg=NONE
-    hi airline_c  ctermbg=NONE guibg=NONE
-    hi airline_tabfill ctermbg=NONE guibg=NONE
   '';
 
   nvim = neovim.override {
@@ -442,7 +453,7 @@ let
           "nerdcommenter"
           "vim-multiple-cursors"
           "undotree"
-          "UltiSnips"
+          #"UltiSnips" #SLOW
           "surround"
           "fugitive"
           "goyo"
@@ -454,7 +465,7 @@ let
           "ale"
           "calendar-vim"
           "vim-localvimrc"
-          "vim-airline"
+          #"vim-airline" #SLOW
           "vim-sneak"
           "vim-slime"
           "deoplete-nvim"
@@ -472,7 +483,7 @@ let
           "rainbow"
           "tabular"
           "vim-better-whitespace"
-          "vim-exchange"
+          #"vim-exchange" - not in 1909
           "nerdtree"
           "nerdtree-git-plugin"
           "vim-hoogle"
