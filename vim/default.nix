@@ -102,14 +102,11 @@ let
 
     ${p "fcpg/vim-spotlightify"}
     ${p "jremmen/vim-ripgrep"}
-    ${p "blindFS/vim-taskwarrior"}
     ${p "alok/notational-fzf-vim"}
     let g:nv_search_paths = ['~/notational']
     let g:nv_show_preview = 1
     let g:nv_wrap_preview_text = 1
     let g:nv_main_directory = '~/notational'
-
-    let g:task_rc_override = 'rc.defaultwidth=0'
 
     "set rtp+=${./vim-devicons} "SLOW
     set rtp+=${./vim-nerdtree-syntax-highlight}
