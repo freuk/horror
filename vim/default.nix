@@ -29,6 +29,7 @@ let
     set encoding=UTF-8
     set fileencoding=UTF-8
     set fileencodings=utf8,prc
+    set conceallevel=0
     set t_Co=256
     set background=dark
     set nostartofline
@@ -101,6 +102,7 @@ let
     let g:showmap_helpall_key = "<C-b>"
 
     ${p "fcpg/vim-spotlightify"}
+    ${p "vim-pandoc/vim-pandoc-syntax"}
     ${p "jremmen/vim-ripgrep"}
     ${p "alok/notational-fzf-vim"}
     let g:nv_search_paths = ['~/notational']
