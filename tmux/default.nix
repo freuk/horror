@@ -65,10 +65,9 @@ let
       "https://github.com/tmux-plugins/tmux-yank/archive/v2.3.0.tar.gz");
   };
   plugins = with tmuxPlugins; [
-    resurrect
     pain-control
     copycat
-    fpp
+    fzf-tmux-url
     open
     prefix-highlight
     myYank
