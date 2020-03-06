@@ -1,4 +1,4 @@
-{ lib, neovim, vimPlugins, symlinkJoin, writeShellScriptBin, fetchgit }:
+{ lib, neovim, vimPlugins, symlinkJoin, writeShellScriptBin, fetchgit, zsh }:
 
 with lib;
 let
@@ -79,6 +79,7 @@ let
     ${p "taku-o/vim-toggle"}
     ${p "lilydjwg/colorizer"}
     ${p "junegunn/fzf"}
+    ${p "junegunn/fzf.vim"}
     ${p "prabirshrestha/async.vim"}
     ${p "vmchale/dhall-vim"}
     ${p "t9md/vim-quickhl"}
@@ -104,6 +105,10 @@ let
     ${p "fcpg/vim-spotlightify"}
     ${p "vim-pandoc/vim-pandoc-syntax"}
     ${p "jremmen/vim-ripgrep"}
+    let g:nv_search_paths = ['~/notational']
+    let g:nv_show_preview = 1
+    let g:nv_wrap_preview_text = 1
+    let g:nv_main_directory = '~/notational'
     ${p "alok/notational-fzf-vim"}
     let g:nv_search_paths = ['~/notational']
     let g:nv_show_preview = 1
@@ -300,12 +305,12 @@ let
 
     let g:rainbow_active = 0
 
-    let g:ale_linters = {'vim': ['vint'], 
-        \ 'yaml': ['yamllint'], 
-        \ 'mail': ['proselint','vale'], 
-        \ 'python': ['flake8'], 
-        \ 'text': ['proselint', 'vale'], 
-        \ 'markdown': ['proselint', 'vale' ], 
+    let g:ale_linters = {'vim': ['vint'],
+        \ 'yaml': ['yamllint'],
+        \ 'mail': ['proselint','vale'],
+        \ 'python': ['flake8'],
+        \ 'text': ['proselint', 'vale'],
+        \ 'markdown': ['proselint', 'vale' ],
         \ 'haskell': []}
     let g:ale_completion_enabled = 0
 
@@ -493,5 +498,9 @@ let
   };
 in symlinkJoin {
   name = "vim";
-  paths = [ nvim.out (writeShellScriptBin "v" "${nvim}/bin/nvim $@").out ];
+  paths = [
+    nvim.out
+    (writeShellScriptBin "v" "${nvim}/bin/nvim $@").out
+    (writeShellScriptBin "vnoshell" "SHELL= ${nvim}/bin/nvim $@").out
+  ];
 }

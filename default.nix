@@ -11,13 +11,13 @@ in rec {
     nix-zsh-completions fasd zsh-completions zsh-navigation-tools direnv ripgrep
     exa atool poppler_utils nixfmt hwloc htop git tree  ranger bat;
 
-  vim = callPackage ./vim { };
+  vim = callPackage ./vim { inherit zsh; };
   tig = callPackage ./tig { };
   tmux = callPackage ./tmux { };
   zsh = callPackage ./zsh { inherit tmux ranger; };
   rangersetup = callPackage ./ranger { };
 
   horror = pkgs.writeShellScriptBin "horror" ''
-    rangersetup && echo "export TERM=tmux-256color && export SHELL=zsh && exec zsh -l" >> ~/.bash_profile
+    rangersetup && echo "export TERM=tmux-256color && export SHELL=`which zsh` && exec zsh -l" >> ~/.bash_profile
   '';
 }

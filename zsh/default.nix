@@ -57,7 +57,6 @@ let
 
     bindkey -a u undo
 
-    bindkey -a '\ ' vi-history-search-backward
     autoload -U   edit-command-line
     zle -N        edit-command-line
     bindkey -a 'v' edit-command-line
@@ -96,7 +95,6 @@ let
     alias -g L="| bat -p"
     alias -g W="| wc -l"
     alias grep='rg'
-    alias find='fd'
     alias c='cd'
     alias tb='nc termbin.com 9999'
     alias less='bat -p'
@@ -130,7 +128,6 @@ let
 
     zle -N _cappane
     bindkey -v '^P' _cappane
-
 
     source ${zaw}/zaw.zsh
     bindkey '^R' zaw-history
