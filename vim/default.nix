@@ -80,6 +80,8 @@ let
     ${p "lilydjwg/colorizer"}
     ${p "junegunn/fzf"}
     ${p "junegunn/fzf.vim"}
+    nmap <c-p> :Files<CR>
+    nmap <c-f> :Lines<CR>
     ${p "prabirshrestha/async.vim"}
     ${p "vmchale/dhall-vim"}
     ${p "t9md/vim-quickhl"}
@@ -104,11 +106,6 @@ let
 
     ${p "fcpg/vim-spotlightify"}
     ${p "vim-pandoc/vim-pandoc-syntax"}
-    ${p "jremmen/vim-ripgrep"}
-    let g:nv_search_paths = ['~/notational']
-    let g:nv_show_preview = 1
-    let g:nv_wrap_preview_text = 1
-    let g:nv_main_directory = '~/notational'
     ${p "alok/notational-fzf-vim"}
     let g:nv_search_paths = ['~/notational']
     let g:nv_show_preview = 1
@@ -182,15 +179,6 @@ let
     let g:multi_cursor_exit_from_visual_mode=0
     let g:multi_cursor_exit_from_insert_mode=0
 
-    "ctrlp
-    let g:ctrlp_user_command = ['.git/', 'git ls-files -oc --exclude-standard']
-    let g:ctrlp_working_path_mode = 'ra'
-    let g:ctrlp_map = '<c-p>'
-    let g:ctrlp_cmd = 'CtrlPMixed'
-    "let g:ctrlp_custom_ignore = {
-    "      \ 'dir':  '\v[\/]\.(git|hg|svn)$$',
-    "      \ 'file': '\v\.(exe|o|p_o|hi|so|dll|html)$$',
-    "      \ }
 
 
     " fugitive git bindings
@@ -453,7 +441,6 @@ let
       vam.knownPlugins = vimPlugins;
       vam.pluginDictionaries = [{
         names = [
-          "ctrlp"
           "nerdcommenter"
           "vim-multiple-cursors"
           "undotree"
