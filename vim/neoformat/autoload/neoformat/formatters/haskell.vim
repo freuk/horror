@@ -28,7 +28,7 @@ endfunction
 function! neoformat#formatters#haskell#ormolu() abort
     return {
         \ 'exe': 'ormolu',
-        \ 'args': ['-o -XTypeApplications'],
+        \ 'args': ['-o -XTypeApplications', '-o -XPatternSynonyms'],
         \ 'stdin': 1,
         \ }
 endfunction
