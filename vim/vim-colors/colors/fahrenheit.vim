@@ -67,8 +67,8 @@ if &t_Co >= 256 || has("gui_running")
     hi PmenuSbar ctermbg=NONE ctermfg=231 cterm=NONE guibg=NONE guifg=#ffffff gui=NONE
     hi PmenuSel ctermbg=235 ctermfg=221 cterm=NONE guibg=#262626 guifg=#ffd75f gui=NONE
     hi PmenuThumb ctermbg=NONE ctermfg=231 cterm=NONE guibg=NONE guifg=#ffffff gui=NONE
-    hi FoldColumn ctermbg=NONE ctermfg=235 cterm=NONE guibg=NONE guifg=#262626 gui=NONE
-    hi Folded ctermbg=NONE ctermfg=95 cterm=NONE guibg=NONE guifg=#875f5f gui=NONE
+    hi FoldColumn ctermbg=235 ctermfg=235 cterm=NONE guibg=NONE guifg=#262626 gui=NONE
+    hi Folded ctermbg=235 ctermfg=95 cterm=NONE guibg=NONE guifg=#875f5f gui=NONE
     hi WildMenu ctermbg=NONE ctermfg=221 cterm=NONE guibg=NONE guifg=#ffd75f gui=NONE
     hi SpecialKey ctermbg=NONE ctermfg=67 cterm=NONE guibg=NONE guifg=#5f87af gui=NONE
     hi DiffAdd ctermbg=235 ctermfg=230 cterm=NONE guibg=#262626 guifg=#ffffd7 gui=NONE

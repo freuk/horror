@@ -2,7 +2,7 @@
 let
   zaw = ./zaw;
   zshrc = writeText "zshrc" ''
-    export  EDITOR="v"
+    export  EDITOR="k"
     export  PAGER="less"
 
     export DIRENV_LOG_FORMAT=
@@ -146,7 +146,7 @@ let
 
     source ${./zsh-syntax-highlighting-filetypes.zsh}
 
-    bindkey -s "^S" "^Qnix-shell "
+    bindkey -s "^S" "^Qcached-nix-shell "
     bindkey -s "^B" "^Qnix-build "
     bindkey -s "^T" "^Qtm "
 

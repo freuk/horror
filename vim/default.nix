@@ -115,7 +115,7 @@ let
     "set rtp+=${./vim-devicons} "SLOW
     set rtp+=${./vim-nerdtree-syntax-highlight}
     set rtp+=${./neoformat}
-    set rtp+=${./vim-fahrenheit}
+    set rtp+=${./vim-colors}
 
     vnoremap Z :w<cr>
     nnoremap <Leader><Leader> :noh<cr>
@@ -487,7 +487,7 @@ in symlinkJoin {
   name = "vim";
   paths = [
     nvim.out
-    (writeShellScriptBin "v" "${nvim}/bin/nvim $@").out
+    #(writeShellScriptBin "v" "${nvim}/bin/nvim $@").out
     (writeShellScriptBin "vnoshell" "SHELL= ${nvim}/bin/nvim $@").out
   ];
 }
