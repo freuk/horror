@@ -18,6 +18,6 @@ in rec {
   rangersetup = callPackage ./ranger { };
 
   horror = pkgs.writeShellScriptBin "horror" ''
-    rangersetup && echo "export TERM=tmux-256color && export SHELL=`which zsh` && exec zsh -l" >> ~/.bash_profile
+    rangersetup && echo "export TERM=tmux-256color && export NNN_OPENER=${nnn/nuke} &&export SHELL=`which zsh` && exec zsh -l" >> ~/.bash_profile
   '';
 }
